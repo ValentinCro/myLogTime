@@ -1,0 +1,29 @@
+<ion-view view-title="Accueil">
+  <ion-content class="padding">
+    <div class="row">
+      <div class="col col-43">
+        <div class="card text-center">
+          <div class="item item-text-wrap compteur">
+            {{ getHour() }} : {{ getMinute() }} : {{ getSecond() }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-43 text-center">
+          <button ng-show="!isStarted() || isPaused()" ng-click="start()" class="button button-balanced">
+            <i class="icon ion-play"></i>
+          </button>
+          <button ng-show="isStarted() && !isPaused()" ng-click="pause()" class="button button-balanced">
+            <i class="icon ion-pause"></i>
+          </button>
+          <button ng-show="isStarted()" ng-click="reload()" class="button button-balanced">
+            <i class="icon ion-refresh"></i>
+          </button>
+          <button ng-show="isStarted()" ng-click="stop()" class="button button-balanced">
+            <i class="icon ion-stop"></i>
+          </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

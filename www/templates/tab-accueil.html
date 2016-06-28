@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col col-43">
         <div class="card text-center">
-          <div class="item item-text-wrap compteur">
-            {{ getHour() }} : {{ getMinute() }} : {{ getSecond() }}
+          <div class="item item-text-wrap">
+            <h1>{{ getHour() }} : {{ getMinute() }} : {{ getSecond() }}</h1>
           </div>
         </div>
       </div>
@@ -24,6 +24,11 @@
             <i class="icon ion-stop"></i>
           </button>
       </div>
+    </div>
+    <div class="row">
+      <p ng-repeat="time in getTimes()">
+        {{ time }}
+      </p>
     </div>
   </ion-content>
 </ion-view>

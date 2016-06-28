@@ -8,6 +8,7 @@ angular.module('starter.controllers', [])
   $scope.started = false;
   $scope.paused = false;
   $scope.timer = null;
+  $scope.times = [];
 
   $scope.startTimer = function() {
     $scope.timer = $interval(function() {
@@ -57,9 +58,18 @@ angular.module('starter.controllers', [])
     $scope.timer = null;
     $scope.started = false;
     $scope.paused = false;
+
+    var timestamp = $scope.second + ($scope.minute * 60) +
+      ($scope.hour * 3600);
+    $scope.times.push(timestamp);
+    console.log($scope.times);
     $scope.hour = 0;
     $scope.minute = 0;
     $scope.second = 0;
+  };
+
+  $scope.getTimes = function() {
+    return $scope.times;
   };
 
   $scope.isStarted = function() {

@@ -1,28 +1,70 @@
 <ion-view view-title="Accueil">
   <ion-content class="padding">
+    <!-- Activité en cours (si il y en a une) -->
     <div class="row">
       <div class="col col-43">
         <div class="card text-center">
-          <div class="item item-text-wrap compteur">
-            {{ getHour() }} : {{ getMinute() }} : {{ getSecond() }}
+          <div class="item item-text-wrap">
+            <span ng-if="getActivities().length === 0">Aucune activité en cours...</span>
+            <span ng-if="getActivities().length !== 0" ng-repeat="activity in getActivities()">
+              <p>
+                n° : {{ activity.number }}
+                Nom : {{ activity.name }}
+                Durée (en heure) : {{ activity.duration }}
+                Date : {{ activity.date }}
+              </p>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Démarrer/arrêter une activité -->
     <div class="row">
-      <div class="col col-43 text-center">
-          <button ng-show="!isStarted() || isPaused()" ng-click="start()" class="button button-balanced">
-            <i class="icon ion-play"></i>
-          </button>
-          <button ng-show="isStarted() && !isPaused()" ng-click="pause()" class="button button-balanced">
-            <i class="icon ion-pause"></i>
-          </button>
-          <button ng-show="isStarted()" ng-click="reload()" class="button button-balanced">
-            <i class="icon ion-refresh"></i>
-          </button>
-          <button ng-show="isStarted()" ng-click="stop()" class="button button-balanced">
-            <i class="icon ion-stop"></i>
-          </button>
+      <div class="col col-43">
+        <div class="card text-center">
+          <div class="title">
+            Nouvelle activité
+          </div>
+          <div class="item item-text-wrap">
+            <button ng-if="getActivityStartedTimes().length === 0" ng-click="startNewActivity()" class="button button-balanced">
+              Démarrer
+            </button>
+            <button ng-if="getActivityStartedTimes().length !== 0 && !paused" ng-click="takeABreak()" class="button button-balanced">
+              Pause
+            </button>
+            <button ng-if="getActivityStartedTimes().length !== 0 && paused" ng-click="continue()" class="button button-balanced">
+              Reprendre
+            </button>
+            <button ng-if="getActivityStartedTimes().length !== 0" ng-click="stopNewActivity()" class="button button-balanced">
+              Terminer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mes 5 (ou plus) dernier logTime de la journée -->
+    <div class="row">
+      <div class="col col-43">
+        <div class="card text-center">
+          <div class="item item-text-wrap">
+            <button class="button button-balanced">
+              Ajouter une activité manuellement
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mes 5 (ou plus) dernier logTime de la journée -->
+    <div class="row">
+      <div class="col col-43">
+        <div class="card text-center">
+          <div class="item item-text-wrap">
+            Aucune activité aujourd'hui...
+          </div>
+        </div>
       </div>
     </div>
   </ion-content>
